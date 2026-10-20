@@ -1,0 +1,25 @@
+# Python 3.12 (64-bit), the interpreter Webots R2025a runs:
+#   C:\Program Files\Python312\python.exe
+# Install with that interpreter:
+#   "C:\Program Files\Python312\python.exe" -m pip install -r requirements.txt
+# Do not install the PyPI package named "controller"; Webots supplies it.
+
+numpy==2.5.1
+opencv-contrib-python==4.13.0.92   # camera image processing (cv2)
+sounddevice==0.5.5                 # microphone input
+vosk==0.3.45                       # offline speech recognition
+pyttsx3==2.99                      # speech output (Windows SAPI voices)
+comtypes==1.4.16                   # lets pyttsx3 speak from a background thread on Windows
+
+# Local LLM runtime from the prebuilt CPU wheel index (as in Lab 5), so no
+# C++ compiler is needed:
+--extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
+--only-binary=llama-cpp-python
+llama-cpp-python==0.3.36
+
+# Models (not included in the submission; see README "Models"):
+#   LLM:    Qwen2.5-0.5B-Instruct, Q4_K_M GGUF (the Lab 5 model)
+#           -> models/qwen2.5-0.5b-instruct-q4_k_m.gguf
+#   Speech: vosk-model-small-en-us-0.15 (the Lab 4 model)
+#           https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip
+#           -> models/vosk-model-small-en-us-0.15/

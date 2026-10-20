@@ -1,0 +1,474 @@
+{
+ "notes": "Few-shot examples for the planner. planning.select_examples() picks the ones whose pattern matches the grounded request; the best match goes last. All examples pass PlanValidator (tests/test_planning.py checks this).",
+ "examples": [
+  {
+   "pattern": "nav_single",
+   "request": "please drive over to the main corridor",
+   "plan": {
+    "version": "1.0",
+    "goal": "go to the main corridor",
+    "steps": [
+     {
+      "action": "navigate",
+      "location": "main_corridor"
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "nav_single",
+   "request": "go back to the meeting room",
+   "plan": {
+    "version": "1.0",
+    "goal": "go to the meeting room",
+    "steps": [
+     {
+      "action": "navigate",
+      "location": "meeting_room"
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "nav_single",
+   "request": "go to the lab",
+   "plan": {
+    "version": "1.0",
+    "goal": "go to the laboratory",
+    "steps": [
+     {
+      "action": "navigate",
+      "location": "laboratory"
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "nav_sequence",
+   "request": "go to the meeting room and after that the lab",
+   "plan": {
+    "version": "1.0",
+    "goal": "go to the meeting room, then the laboratory",
+    "steps": [
+     {
+      "action": "navigate",
+      "location": "meeting_room"
+     },
+     {
+      "action": "navigate",
+      "location": "laboratory"
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "nav_sequence",
+   "request": "visit office A and then the meeting room",
+   "plan": {
+    "version": "1.0",
+    "goal": "go to office A, then the meeting room",
+    "steps": [
+     {
+      "action": "navigate",
+      "location": "office_a"
+     },
+     {
+      "action": "navigate",
+      "location": "meeting_room"
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "nav_return",
+   "request": "take me to the lab and come back",
+   "plan": {
+    "version": "1.0",
+    "goal": "go to the laboratory, then return to reception",
+    "steps": [
+     {
+      "action": "navigate",
+      "location": "laboratory"
+     },
+     {
+      "action": "return_home"
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "nav_return",
+   "request": "head over to office B and then come back to the front desk",
+   "plan": {
+    "version": "1.0",
+    "goal": "go to office B, then return to reception",
+    "steps": [
+     {
+      "action": "navigate",
+      "location": "office_b"
+     },
+     {
+      "action": "return_home"
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "search_room",
+   "request": "search the meeting room for the red ball",
+   "plan": {
+    "version": "1.0",
+    "goal": "search the meeting room for the red ball",
+    "steps": [
+     {
+      "action": "navigate",
+      "location": "meeting_room"
+     },
+     {
+      "action": "search",
+      "object": "ball",
+      "colour": "red"
+     },
+     {
+      "action": "return_home"
+     },
+     {
+      "action": "report",
+      "message": "Report whether the red ball was found."
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "search_room",
+   "request": "is the red ball in office A?",
+   "plan": {
+    "version": "1.0",
+    "goal": "check office A for the red ball",
+    "steps": [
+     {
+      "action": "navigate",
+      "location": "office_a"
+     },
+     {
+      "action": "search",
+      "object": "ball",
+      "colour": "red"
+     },
+     {
+      "action": "return_home"
+     },
+     {
+      "action": "report",
+      "message": "Report whether the red ball was found."
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "search_conditional",
+   "request": "look in the lab for the red ball, if it is not there check the meeting room",
+   "plan": {
+    "version": "1.0",
+    "goal": "find the red ball; laboratory first, then meeting room",
+    "steps": [
+     {
+      "action": "navigate",
+      "location": "laboratory"
+     },
+     {
+      "action": "search",
+      "object": "ball",
+      "colour": "red"
+     },
+     {
+      "action": "conditional",
+      "condition": {
+       "source": "last_search_result",
+       "operator": "found",
+       "value": false
+      },
+      "then": [
+       {
+        "action": "navigate",
+        "location": "meeting_room"
+       },
+       {
+        "action": "search",
+        "object": "ball",
+        "colour": "red"
+       }
+      ],
+      "else": []
+     },
+     {
+      "action": "return_home"
+     },
+     {
+      "action": "report",
+      "message": "Report where the red ball was found."
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "search_conditional",
+   "request": "check office B first; only search office A if the red ball is absent",
+   "plan": {
+    "version": "1.0",
+    "goal": "find the red ball; office B first, office A only if absent",
+    "steps": [
+     {
+      "action": "navigate",
+      "location": "office_b"
+     },
+     {
+      "action": "search",
+      "object": "ball",
+      "colour": "red"
+     },
+     {
+      "action": "conditional",
+      "condition": {
+       "source": "last_search_result",
+       "operator": "found",
+       "value": false
+      },
+      "then": [
+       {
+        "action": "navigate",
+        "location": "office_a"
+       },
+       {
+        "action": "search",
+        "object": "ball",
+        "colour": "red"
+       }
+      ],
+      "else": []
+     },
+     {
+      "action": "return_home"
+     },
+     {
+      "action": "report",
+      "message": "Report where the red ball was found."
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "search_all",
+   "request": "where is the green ball?",
+   "plan": {
+    "version": "1.0",
+    "goal": "find the green ball",
+    "steps": [
+     {
+      "action": "search",
+      "object": "ball",
+      "colour": "green",
+      "locations": [
+       "laboratory",
+       "office_a",
+       "office_b",
+       "meeting_room"
+      ]
+     },
+     {
+      "action": "return_home"
+     },
+     {
+      "action": "report",
+      "message": "Report where the green ball was found."
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "search_all",
+   "request": "find the red ball",
+   "plan": {
+    "version": "1.0",
+    "goal": "find the red ball",
+    "steps": [
+     {
+      "action": "search",
+      "object": "ball",
+      "colour": "red",
+      "locations": [
+       "laboratory",
+       "office_a",
+       "office_b",
+       "meeting_room"
+      ]
+     },
+     {
+      "action": "return_home"
+     },
+     {
+      "action": "report",
+      "message": "Report where the red ball was found."
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "unsupported",
+   "request": "fly through the wall to office B",
+   "plan": {
+    "version": "1.0",
+    "goal": "fly through the wall to office B",
+    "steps": [
+     {
+      "action": "ask",
+      "question": "I cannot fly or pass through walls. Shall I drive to office B instead?"
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "unsupported",
+   "request": "pick up the green ball and bring it here",
+   "plan": {
+    "version": "1.0",
+    "goal": "fetch the green ball",
+    "steps": [
+     {
+      "action": "ask",
+      "question": "I cannot pick up or carry objects. Shall I find the green ball and tell you where it is?"
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "observe",
+   "request": "what can you see in office B",
+   "plan": {
+    "version": "1.0",
+    "goal": "look around office B",
+    "steps": [
+     {
+      "action": "navigate",
+      "location": "office_b"
+     },
+     {
+      "action": "observe"
+     },
+     {
+      "action": "report",
+      "message": "Report what was seen."
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "observe",
+   "request": "go to the corridor and look around",
+   "plan": {
+    "version": "1.0",
+    "goal": "look around the main corridor",
+    "steps": [
+     {
+      "action": "navigate",
+      "location": "main_corridor"
+     },
+     {
+      "action": "observe"
+     },
+     {
+      "action": "report",
+      "message": "Report what was seen."
+     }
+    ]
+   }
+  }
+ ],
+ "replan_examples": [
+  {
+   "pattern": "replan_search",
+   "situation": "Original request: look in office A for the red ball; if it is not there, check the meeting room\nAlready searched, not found: none\nCannot reach: office_a\nRooms still to search: meeting_room\nTarget: red ball",
+   "plan": {
+    "version": "1.0",
+    "goal": "office A is blocked; search the meeting room for the red ball instead",
+    "steps": [
+     {
+      "action": "search",
+      "object": "ball",
+      "colour": "red",
+      "locations": [
+       "meeting_room"
+      ]
+     },
+     {
+      "action": "return_home"
+     },
+     {
+      "action": "report",
+      "message": "Report that office A could not be reached and what the search found."
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "replan_search",
+   "situation": "Original request: find the green ball\nAlready searched, not found: laboratory\nCannot reach: office_b\nRooms still to search: office_a, meeting_room\nTarget: green ball",
+   "plan": {
+    "version": "1.0",
+    "goal": "office B is blocked; search the remaining rooms for the green ball",
+    "steps": [
+     {
+      "action": "search",
+      "object": "ball",
+      "colour": "green",
+      "locations": [
+       "office_a",
+       "meeting_room"
+      ]
+     },
+     {
+      "action": "return_home"
+     },
+     {
+      "action": "report",
+      "message": "Report that office B could not be reached and what the search found."
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "replan_give_up",
+   "situation": "Original request: go to office B\nAlready searched, not found: none\nCannot reach: office_b\nRooms still to search: none\nTarget: none",
+   "plan": {
+    "version": "1.0",
+    "goal": "office B cannot be reached; return and report",
+    "steps": [
+     {
+      "action": "return_home"
+     },
+     {
+      "action": "report",
+      "message": "Report that the route to office B is blocked."
+     }
+    ]
+   }
+  },
+  {
+   "pattern": "replan_give_up",
+   "situation": "Original request: search the laboratory for the red ball\nAlready searched, not found: none\nCannot reach: laboratory\nRooms still to search: none\nTarget: red ball",
+   "plan": {
+    "version": "1.0",
+    "goal": "the laboratory cannot be reached; return and report",
+    "steps": [
+     {
+      "action": "return_home"
+     },
+     {
+      "action": "report",
+      "message": "Report that the laboratory could not be reached, so the search was not done."
+     }
+    ]
+   }
+  }
+ ]
+}

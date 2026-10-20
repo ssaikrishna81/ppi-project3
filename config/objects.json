@@ -1,0 +1,13 @@
+{
+  "object_types": [
+    "ball",
+    "box",
+    "cylinder"
+  ],
+  "colours": [
+    "red",
+    "green",
+    "blue",
+    "yellow"
+  ]
+}

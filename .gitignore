@@ -1,0 +1,19 @@
+# Python / editor clutter
+__pycache__/
+*.py[cod]
+.idea/
+.vscode/
+.DS_Store
+
+# Model files: not shared or submitted (see README "Installation")
+models/*.gguf
+models/*.bin
+models/*.safetensors
+models/vosk-model-*/
+
+# Local run output: traces, camera frames, typed-input requests
+logs/
+runtime/
+
+# Note: config/llm_config.json IS shared - it holds model settings only, no
+# credentials, and the system needs it to run.

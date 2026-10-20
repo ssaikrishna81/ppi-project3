@@ -1,0 +1,232 @@
+{
+  "nodes": {
+    "reception": [
+      -0.8,
+      -2.8
+    ],
+    "centre_south": [
+      0.0,
+      -1.15
+    ],
+    "centre": [
+      0.0,
+      0.0
+    ],
+    "centre_north": [
+      0.0,
+      1.7
+    ],
+    "main_corridor": [
+      0.0,
+      2.4
+    ],
+    "laboratory_entry": [
+      -2.45,
+      -0.75
+    ],
+    "office_a_entry": [
+      -2.45,
+      0.55
+    ],
+    "meeting_room_entry": [
+      2.45,
+      -0.75
+    ],
+    "office_b_entry": [
+      2.45,
+      0.55
+    ],
+    "laboratory": [
+      -3.5,
+      -2.0
+    ],
+    "office_a": [
+      -3.5,
+      2.0
+    ],
+    "meeting_room": [
+      3.5,
+      -2.0
+    ],
+    "office_b": [
+      3.5,
+      2.0
+    ],
+    "centre_bypass_west": [
+      -1.2,
+      0.9
+    ],
+    "centre_bypass_east": [
+      1.2,
+      0.9
+    ],
+    "office_a_inner": [
+      -2.55,
+      1.75
+    ],
+    "office_b_inner": [
+      2.55,
+      1.75
+    ],
+    "meeting_room_inner": [
+      2.6,
+      -1.75
+    ],
+    "laboratory_far": [
+      -3.35,
+      -3.65
+    ],
+    "office_a_far": [
+      -3.05,
+      3.6
+    ],
+    "office_b_far": [
+      2.35,
+      3.0
+    ],
+    "meeting_room_far": [
+      2.35,
+      -3.65
+    ],
+    "door_west": [
+      -3.6,
+      0.0
+    ],
+    "door_east": [
+      3.6,
+      0.0
+    ]
+  },
+  "edges": [
+    [
+      "reception",
+      "centre_south"
+    ],
+    [
+      "centre_south",
+      "centre"
+    ],
+    [
+      "centre",
+      "centre_north"
+    ],
+    [
+      "centre_north",
+      "main_corridor"
+    ],
+    [
+      "centre_south",
+      "laboratory_entry"
+    ],
+    [
+      "laboratory_entry",
+      "laboratory"
+    ],
+    [
+      "centre_north",
+      "office_a_entry"
+    ],
+    [
+      "office_a_entry",
+      "office_a_inner"
+    ],
+    [
+      "office_a_inner",
+      "office_a"
+    ],
+    [
+      "centre_south",
+      "meeting_room_entry"
+    ],
+    [
+      "meeting_room_entry",
+      "meeting_room_inner"
+    ],
+    [
+      "meeting_room_inner",
+      "meeting_room"
+    ],
+    [
+      "centre_north",
+      "office_b_entry"
+    ],
+    [
+      "office_b_entry",
+      "office_b_inner"
+    ],
+    [
+      "office_b_inner",
+      "office_b"
+    ],
+    [
+      "centre",
+      "centre_bypass_west"
+    ],
+    [
+      "centre_bypass_west",
+      "centre_north"
+    ],
+    [
+      "centre",
+      "centre_bypass_east"
+    ],
+    [
+      "centre_bypass_east",
+      "centre_north"
+    ],
+    [
+      "laboratory_entry",
+      "laboratory_far"
+    ],
+    [
+      "office_a",
+      "office_a_far"
+    ],
+    [
+      "office_b_inner",
+      "office_b_far"
+    ],
+    [
+      "office_b",
+      "office_b_far"
+    ],
+    [
+      "meeting_room_inner",
+      "meeting_room_far"
+    ],
+    [
+      "office_a_entry",
+      "centre"
+    ],
+    [
+      "office_b_entry",
+      "centre"
+    ]
+  ],
+  "notes": [
+    "Extended from the supplied graph. The supplied edges office_a_entry-office_a, office_b_entry-office_b and meeting_room_entry-meeting_room passed through the yellow cylinder, green ball and blue box, so each now goes through an *_inner node.",
+    "office_a_entry and office_b_entry moved from y=0.75 to y=0.55: at 0.75 the edge to centre_north passed 0.14 m from the partition corner, close enough for the 45-degree proximity sensors to stop the robot.",
+    "centre-centre_north is kept although it crosses BLOCKING_OBSTACLE: the specification calls that obstacle movable, so the robot must discover it with its proximity sensors. The two centre_bypass nodes give a route around it after it is detected.",
+    "*_far nodes are third search viewpoints behind the furniture (lab bench, office desks, meeting table). A 2-D line-of-sight check showed 8-23% of each room's floor was hidden from the first two viewpoints; each *_far spot was chosen to see most of that strip and to be reachable in a straight line with 0.18 m clearance.",
+    "office_a_entry-centre and office_b_entry-centre: direct links so trips between an office and the south side do not have to pass centre_north and go round BLOCKING_OBSTACLE.",
+    "backup_edges: the internal doors in the walls at y=0 (lab <-> office A at x=-3.6, meeting room <-> office B at x=3.6). Used only when no route exists without them (e.g. a room's main doorway is blocked). Each path keeps at least 0.19 m from walls, furniture and all ball spawn positions."
+  ],
+  "backup_edges": [
+    [
+      "laboratory",
+      "door_west"
+    ],
+    [
+      "door_west",
+      "office_a"
+    ],
+    [
+      "meeting_room_inner",
+      "door_east"
+    ],
+    [
+      "door_east",
+      "office_b_inner"
+    ]
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "enabled": true,
+  "vosk_model": "models/vosk-model-small-en-us-0.15",
+  "input_device": null,
+  "sample_rate": 16000,
+  "block_size": 4000,
+  "use_grammar": true,
+  "tts_rate": 170,
+  "mute_after_speaking_s": 0.6,
+  "vocabulary": "go to the a an lab laboratory office b meeting room corridor hallway main reception front desk lobby entrance home find search look check for in it is are was red green blue yellow ball balls box cube cylinder first only if not there isnt absent missing then and after that come back return straight right stop cancel halt abort what you doing why where yes yeah yep no nope never mind please drive fly through wall walls jump over table pick up carry bring open can could would me help lost locate visit head take around see okay ok sure of status are which colour color one any",
+  "notes": [
+    "vocabulary restricts Vosk to the robot's words plus [unk]. Tested by feeding pyttsx3-synthesised requests to Vosk: free recognition heard 'office be' and 'off a'; with this vocabulary all 8 test phrases were transcribed exactly.",
+    "input_device null = system default microphone; set an index from 'python -m sounddevice' if needed. The Vosk model folder is not submitted; see README for the download link."
+  ]
+}

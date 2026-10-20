@@ -1,0 +1,26 @@
+{
+  "reception": [
+    -0.8,
+    -2.8
+  ],
+  "office_a": [
+    -3.5,
+    2.0
+  ],
+  "office_b": [
+    3.5,
+    2.0
+  ],
+  "laboratory": [
+    -3.5,
+    -2.0
+  ],
+  "meeting_room": [
+    3.5,
+    -2.0
+  ],
+  "main_corridor": [
+    0.0,
+    2.4
+  ]
+}

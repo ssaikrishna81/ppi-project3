@@ -1,0 +1,14 @@
+{
+  "target_def": "RED_BALL",
+  "height": 0.09,
+  "approved_spawn_points": [
+    {"id": "laboratory_west", "location": "laboratory", "translation": [-4.35, -1.35, 0.09]},
+    {"id": "laboratory_east", "location": "laboratory", "translation": [-2.75, -2.85, 0.09]},
+    {"id": "office_a_west", "location": "office_a", "translation": [-4.35, 1.30, 0.09]},
+    {"id": "office_a_north", "location": "office_a", "translation": [-2.75, 3.20, 0.09]},
+    {"id": "office_b_south", "location": "office_b", "translation": [3.65, 1.15, 0.09]},
+    {"id": "office_b_north", "location": "office_b", "translation": [2.75, 3.20, 0.09]},
+    {"id": "meeting_east", "location": "meeting_room", "translation": [4.55, -1.35, 0.09]},
+    {"id": "meeting_south", "location": "meeting_room", "translation": [2.75, -3.25, 0.09]}
+  ]
+}
